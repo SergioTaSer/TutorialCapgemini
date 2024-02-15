@@ -29,7 +29,6 @@ export class PrestamoListComponent implements OnInit {
 
     games: Game[];
     clientes: Cliente[];
-    prestamos: Prestamo[];
     filtros: PrestamoFilters = {};
     filterGame: Game;
     filterCliente: Cliente;
@@ -43,9 +42,7 @@ export class PrestamoListComponent implements OnInit {
         private clienteService: ClienteService,
         private prestamoService: PrestamoService,
         public dialog: MatDialog,
-    ) { 
-        this.filtros = new PrestamoFilters();
-    }
+    ) { }
 
     ngOnInit(): void {
 
@@ -65,9 +62,9 @@ export class PrestamoListComponent implements OnInit {
 
     onCleanFilter(): void {
 
-        this.filtros.cliente = null; this.filterCliente = null;
-        this.filtros.fecha = null; this.filterFecha = null;
-        this.filtros.game = null; this.filterGame = null;
+        this.filterCliente = null;
+        this.filterFecha = null;
+        this.filterGame = null;
 
         this.onSearch();
     }
@@ -91,6 +88,10 @@ export class PrestamoListComponent implements OnInit {
             }]
         }
 
+        if (event != null) {
+            pageable.pageSize = event.pageSize
+            pageable.pageNumber = event.pageIndex;
+        }
 
         this.filtros.game = this.filterGame?.id ?? null;
         this.filtros.cliente = this.filterCliente?.id ?? null;
@@ -101,17 +102,10 @@ export class PrestamoListComponent implements OnInit {
             this.filtros.fecha = null;
         } else{
             const year = this.filterFecha?.getFullYear().toString();
-            const month = (this.filterFecha?.getMonth() + 1)
-            .toString()
-            .padStart(2, '0'); 
+            const month = (this.filterFecha?.getMonth() + 1).toString().padStart(2, '0'); 
             const day = this.filterFecha?.getDate().toString().padStart(2, '0');
             const formatDate = `${year}-${month}-${day}`;
             this.filtros.fecha = formatDate ?? null;
-        }
-
-        if (event != null) {
-            pageable.pageSize = event.pageSize
-            pageable.pageNumber = event.pageIndex;
         }
         
 

@@ -43,7 +43,4 @@ public class FiltersDto {
         this.fecha = fecha;
     }
 
-    public FiltersDto() {
-    }
-
 }

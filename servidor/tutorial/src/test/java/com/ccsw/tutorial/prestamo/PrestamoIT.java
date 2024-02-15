@@ -48,7 +48,7 @@ public class PrestamoIT {
 
         PrestamoSearchDto prestamoDto = new PrestamoSearchDto();
         prestamoDto.setPageable(new PageableRequest(0, 5));
-        FiltersDto filterDto = new FiltersDto();
+        FiltersDto filterDto = new FiltersDto(null, null, null);
         filterDto.setGameTitle(1L);
         prestamoDto.setFilterParams(filterDto);
 
