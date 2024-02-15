@@ -1,0 +1,67 @@
+<div class="container">
+    <h1> Crear Prestamo </h1>
+
+
+    <form>
+        <mat-form-field>
+            <mat-label>Identificador</mat-label>
+            <input type="text" matInput placeholder="Identificador" [(ngModel)]="prestamo.id" name="id" disabled>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Juego</mat-label>
+            <mat-select disableRipple [(ngModel)]="prestamo.game" name="game" required>
+                <mat-option *ngFor="let game of games" [value]="game">{{game.title}}</mat-option>
+            </mat-select>
+            <mat-error>Selecciona un juego</mat-error>
+        </mat-form-field> 
+
+        <mat-form-field>
+            <mat-label>Cliente</mat-label>
+            <mat-select disableRipple [(ngModel)]="prestamo.cliente" name="cliente" required>
+                <mat-option *ngFor="let cliente of clientes" [value]="cliente">{{cliente.name}}</mat-option>
+            </mat-select>
+            <mat-error>Selecciona un cliente</mat-error>
+        </mat-form-field> 
+    
+        <mat-form-field>
+            <mat-label>Fecha Inicio</mat-label>
+            <input 
+            matInput 
+            [matDatepicker]="fechaPrestamoPicker" 
+            placeholder="Fecha Inicio Prestamo" 
+            [(ngModel)]="prestamo.fechaPrestamo" 
+            name="fechaPrestamo">
+            <mat-datepicker-toggle 
+            matSuffix 
+            [for]="fechaPrestamoPicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #fechaPrestamoPicker></mat-datepicker>
+            <mat-error>La fecha de inicio del prestamo no puede estar vacía</mat-error>
+        </mat-form-field>
+        
+
+        <mat-form-field>
+            <mat-label>Fecha Devolución</mat-label>
+            <input 
+            matInput 
+            [matDatepicker]="fechaDevolucionPicker" 
+            placeholder="Fecha Devolución" 
+            [(ngModel)]="prestamo.fechaDevolucion" 
+            name="fechaDevolucion">
+            <mat-datepicker-toggle 
+            matSuffix 
+            [for]="fechaDevolucionPicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #fechaDevolucionPicker></mat-datepicker>
+            <mat-error>La fecha de Devolución del préstamo no puede estar vacía</mat-error>
+        </mat-form-field>
+        
+        
+    </form>
+
+    <div class="buttons">
+        <button mat-stroked-button (click)="onClose()">Cerrar</button>
+        <button mat-flat-button color="primary" (click)="onSave()">Guardar</button>
+    </div>
+</div>
